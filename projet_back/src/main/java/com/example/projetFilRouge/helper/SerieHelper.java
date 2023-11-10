@@ -145,8 +145,6 @@ public class SerieHelper {
 //                    System.out.println(casting.get("cast_id"));
 
                         castRepository.save(cast);
-
-
                     }
                 }
             }
@@ -181,7 +179,11 @@ public class SerieHelper {
                 episode.setProduction_code(ep.get("production_code").asText());
                 episode.setRuntime(ep.get("runtime").asInt());
                 episode.setSeason_number(ep.get("season_number").asInt());
-                episode.setShow_id(ep.get("show_id").asInt());
+
+                if(ep.get("show_id") != null) {
+                    episode.setShow_id(ep.get("show_id").asInt());
+                }
+
                 episode.setStill_path(ep.get("still_path").asText());
                 episode.setVote_average(ep.get("vote_average").asDouble());
                 episode.setVote_count(ep.get("vote_count").asInt());
@@ -191,7 +193,6 @@ public class SerieHelper {
             }
         }
     }
-
 
     public void getDetailSeries(int number, int numberList) throws IOException, InterruptedException {
 
@@ -214,36 +215,26 @@ public class SerieHelper {
                 for (Serie s : sublist1) {
                     if (s.getNbr_seasons() < 25) {
                         for (int i = 1; i <= s.getNbr_seasons(); i++) {
-
                             requestEpisode(s.getIdDb(), i);
-
                         }
                     }
                 }
                 break;
-
             case 2:
                 for (Serie s2 : sublist2) {
                     if (s2.getNbr_seasons() < 25) {
                         for (int i = 1; i <= s2.getNbr_seasons(); i++) {
-
                             requestEpisode(s2.getIdDb(), i);
-
                         }
-
                     }
                 }
                 break;
-
             case 3:
                 for (Serie s3 : sublist3) {
                     if (s3.getNbr_seasons() < 25) {
                         for (int i = 1; i <= s3.getNbr_seasons(); i++) {
-
                             requestEpisode(s3.getIdDb(), i);
-
                         }
-
                     }
                 }
                 break;
@@ -251,11 +242,8 @@ public class SerieHelper {
                 for (Serie s4 : sublist4) {
                     if (s4.getNbr_seasons() < 25) {
                         for (int i = 1; i <= s4.getNbr_seasons(); i++) {
-
                             requestEpisode(s4.getIdDb(), i);
-
                         }
-
                     }
                 }
                 break;
@@ -263,7 +251,5 @@ public class SerieHelper {
                 System.out.println("Choix incorrect");
                 break;
         }
-
     }
-
 }

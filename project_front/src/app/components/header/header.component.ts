@@ -8,6 +8,13 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+
+  searchInput: string = ""
+
+  clickSearch(){
+    console.log(this.searchInput)
+  }
+
   isLandPage = new BehaviorSubject(true)
   
 

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component,Output,EventEmitter } from '@angular/core';
 import { MovieService } from 'src/app/services/movie.service';
 import { CommonModule } from '@angular/common'
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ModalComponent } from '../modal/modal.component';
+import { ModalService } from 'src/app/services/modal.service';
+import { GetMoviesService } from 'src/app/services/get-movies.service';
 
 
 
@@ -15,27 +17,29 @@ export class HomePageComponent {
 
   movies: any[] = [];
 
+
+
   constructor(
     private movieService: MovieService,
-    private modalService: MdbModalService) {
-    
+    private modalService: ModalService,
+    ) {
+    this.movieService.getMovies().subscribe(movies =>{ this.movies = movies;
+    console.log(movies)})
   }
 
-  ngOnInit(): void {
-    console.log("on init")
-    this.movieService.getMovies().subscribe((data: any) =>{
-      this.movies = data;
-      console.log(data)
-    })
-  }
+ 
 
   modalRef: MdbModalRef<ModalComponent> | null = null;
 
-  
+  @Output()
+  clickModal = new EventEmitter<string>()
 
-  openModal() {
-    this.modalRef = this.modalService.open(ModalComponent, {
-      data: { title: 'Custom title' },
-    });
-  }
+  onClickHandler(id: number) {
+    this.modalService.modal$.next('form')
+    const result = this.movies.filter((movie: any) => movie.idDb == id
+     );
+    this.modalService.idByMovieForModal$.next(result)
+    
+    console.log(result)
+}
 }

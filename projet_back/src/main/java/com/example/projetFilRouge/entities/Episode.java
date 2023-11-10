@@ -17,23 +17,23 @@ public class Episode {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;
 
-    @Column(length = 2500)
+    @Column(length = 5000)
     private String air_date;
 
     private int episode_number;
 
-    @Column(length = 2500)
+    @Column(length = 5000)
     private String episode_type;
 
     private int idDb;
 
-    @Column(length = 2500)
+    @Column(length = 5000)
     private String name;
 
-    @Column(length = 2500)
+    @Column(length = 5000)
     private String overview;
 
-    @Column(length = 2500)
+    @Column(length = 5000)
     private String production_code;
 
     private int runtime;
@@ -42,7 +42,7 @@ public class Episode {
 
     private int show_id;
 
-    @Column(length = 2500)
+    @Column(length = 5000)
     private String still_path;
 
     private double vote_average;
