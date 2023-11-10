@@ -1,0 +1,11 @@
+
+
+<div id="grid">
+    <div class="grid-pict" *ngFor="let movie of movies">
+      <a>
+        <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"/>
+      </a>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="openModal()">Open modal</button>
+  
