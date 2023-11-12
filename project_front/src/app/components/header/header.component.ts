@@ -1,3 +1,4 @@
+import { MovieService } from 'src/app/services/movie.service';
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -10,6 +11,8 @@ import { BehaviorSubject } from 'rxjs';
 export class HeaderComponent implements OnInit {
 
   searchInput: string = ""
+
+  movies: any[] = [];
 
   clickSearch(){
     console.log(this.searchInput)
@@ -32,5 +35,11 @@ export class HeaderComponent implements OnInit {
     // });
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private movieService: MovieService) {}
+
+  onClickSearch(){
+    console.log(this.searchInput)
+    this.movieService.postSearch(this.searchInput).subscribe(data => {this.movies = data; console.log(this.searchInput)})
+  }
 }
